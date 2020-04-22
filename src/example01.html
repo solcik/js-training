@@ -1,0 +1,76 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Hello world</h1>
+    <div>
+        <div id="alert" class="alert alert-primary" role="alert"></div>
+
+        <div class="form-group">
+            <label for="a">a</label>
+            <input type="number" class="form-control" id="a" disabled>
+        </div>
+        <div class="form-group">
+            <label for="b">b</label>
+            <input type="number" class="form-control" id="b" disabled>
+        </div>
+        <div class="form-group">
+            <label for="result">result</label>
+            <input type="number" class="form-control" id="result">
+        </div>
+        <button id="check" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+<script>
+    var aEl = document.getElementById('a');
+    var bEl = document.getElementById('b');
+    var resultEl = document.getElementById('result');
+    var alertEl = document.getElementById('alert');
+    var i = 0;
+
+    var examples = [
+        { a: 3, b: 5}, // 0
+        { a: 2, b: 4}, // 1
+        { a: 2, b: 2}, // 2
+        { a: 1, b: 8}, // 3
+    ];
+
+    function fillInExample (j) {
+        if (j < 0 || j >= examples.length) {
+            console.log('nekorektni vstup!!!');
+            return;
+        }
+
+        var example = examples[j];
+        aEl.value = example.a;
+        bEl.value = example.b;
+    }
+
+    function check() {
+        var aValue = parseInt(aEl.value, 10);
+        var bValue = parseInt(bEl.value, 10);
+        var resultValue = parseInt(resultEl.value, 10);
+
+        if (aValue + bValue === resultValue) {
+            alertEl.innerText = `spravne`;
+            alertEl.className = 'alert alert-success'
+        } else {
+            alertEl.innerText = `spatne`;
+            alertEl.className = 'alert alert-danger'
+        }
+        resultEl.value = '';
+        i = i + 1;
+        fillInExample(i)
+    }
+
+    fillInExample(i);
+
+    var checkEl = document.getElementById('check');
+    checkEl.onclick = check;
+</script>
+</body>
+</html>
